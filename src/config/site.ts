@@ -5,6 +5,7 @@ export const siteConfig = {
   url: "https://polyris.dev",
   github: "https://github.com/Polyris/polyris",
   docs: "https://github.com/Polyris/polyris/tree/main/docs",
+  quickstart: "https://github.com/Polyris/polyris/blob/main/docs/getting-started/QUICKSTART.md",
   install:
     "curl -fsSL https://github.com/Polyris/polyris/releases/latest/download/install.sh | bash",
   nav: [

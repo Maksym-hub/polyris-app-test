@@ -1,12 +1,26 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import localFont from "next/font/local"
+import { Geist_Mono } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { siteConfig } from "@/config/site"
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const fixelText = localFont({
+  src: [
+    { path: "../../public/fonts/FixelText-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/FixelText-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../../public/fonts/FixelText-SemiBold.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-fixel-text",
+})
+
+const fixelDisplay = localFont({
+  src: [
+    { path: "../../public/fonts/FixelDisplay-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../../public/fonts/FixelDisplay-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../../public/fonts/FixelDisplay-ExtraBold.woff2", weight: "800", style: "normal" },
+  ],
+  variable: "--font-fixel-display",
 })
 
 const geistMono = Geist_Mono({
@@ -45,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fixelText.variable} ${fixelDisplay.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

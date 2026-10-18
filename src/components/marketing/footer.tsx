@@ -1,51 +1,94 @@
+import Image from "next/image"
 import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
 import { siteConfig } from "@/config/site"
+
+const footerLinks = {
+  Product: [
+    { label: "Quickstart", href: siteConfig.quickstart },
+    { label: "Docs", href: siteConfig.docs },
+    { label: "GitHub", href: siteConfig.github },
+  ],
+  Legal: [
+    {
+      label: "Apache 2.0",
+      href: "https://github.com/Polyris/polyris/blob/main/LICENSE",
+    },
+  ],
+}
 
 export function Footer() {
   return (
     <footer className="border-border/40 mt-auto border-t">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <Separator className="mb-8" />
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-muted-foreground text-sm">
-            <span className="text-foreground font-medium">{siteConfig.name}</span> ·{" "}
-            <Link
-              href="https://github.com/Polyris/polyris/blob/main/LICENSE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors"
-            >
-              Apache 2.0
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="col-span-2 sm:col-span-2">
+            <Link href="/" className="inline-flex items-center">
+              <Image
+                src="/logo.png"
+                alt={siteConfig.name}
+                width={80}
+                height={34}
+                className="dark:hidden"
+              />
+              <Image
+                src="/logo-dark.png"
+                alt={siteConfig.name}
+                width={80}
+                height={34}
+                className="hidden dark:block"
+              />
             </Link>
-          </p>
-          <div className="flex items-center gap-4">
-            {siteConfig.nav.map((item) => (
+            <p className="text-muted-foreground mt-3 max-w-xs text-sm">
+              Serverless data pipeline orchestration on AWS Step Functions.
+            </p>
+            <div className="mt-4 flex items-center gap-2">
+              <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+                Powered by
+              </span>
               <Link
-                key={item.href}
-                href={item.href}
+                href="https://quintagroup.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                className="transition-opacity hover:opacity-75"
               >
-                {item.label}
+                <Image
+                  src="/quinta-group.png"
+                  alt="QuintaGroup"
+                  width={88}
+                  height={25}
+                  className="dark:invert"
+                />
               </Link>
-            ))}
+            </div>
           </div>
+
+          {Object.entries(footerLinks).map(([group, links]) => (
+            <div key={group}>
+              <p className="text-foreground mb-3 text-xs font-semibold tracking-widest uppercase">
+                {group}
+              </p>
+              <ul className="space-y-2">
+                {links.map(({ label, href }) => (
+                  <li key={label}>
+                    <Link
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        <div className="mt-6 flex items-center justify-end gap-2">
-          <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-            Powered by
-          </span>
-          <Link
-            href="https://quintagroup.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-base font-bold tracking-tight transition-opacity hover:opacity-75"
-          >
-            <span className="text-foreground">Quinta</span>
-            <span className="text-orange-600">Group</span>
-          </Link>
+
+        <div className="border-border/40 mt-10 border-t pt-6">
+          <p className="text-muted-foreground text-xs">
+            © {new Date().getFullYear()} Quintagroup. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -95,10 +95,50 @@ src/
     marketing/          # landing-specific sections (Hero, Features, CTA)
   lib/
     utils.ts            # cn() and friends
+    dag-code.ts         # Python DSL code sample used in FeaturesShowcase
 ```
 
 Marketing sections (Hero, Features, Pricing, CTA, Footer) are plain
 components composing shadcn primitives — not a design system.
+
+---
+
+## Copy rules — what NOT to say
+
+**Rule 6 — No competitor names.** Never mention specific competitors (Airflow, MWAA, Prefect,
+Dagster, etc.) by name in any user-facing copy. Describe the problem space in neutral terms
+("traditional orchestrators", "always-on schedulers") without naming the vendor.
+
+**Rule 7 — No specific cost promises.** Never publish concrete pricing claims ("~$8/month",
+"$350/month") in copy — these become outdated and read as guarantees. Instead describe the
+cost _model_: event-driven, pay-per-transition, scales to zero. Specific numbers belong in
+the architecture docs, not the marketing site.
+
+---
+
+## React component rules
+
+**Rule 8 — Clean up all timers.**
+Every `setTimeout` or `setInterval` inside a component must be stored in a
+`useRef` and cancelled in a `useEffect` cleanup. Also cancel before scheduling
+a new one (prevents stale callbacks from racing). Pattern:
+
+```ts
+const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+// before setting: if (timerRef.current) clearTimeout(timerRef.current)
+// on unmount:     useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current) }, [])
+```
+
+**Rule 9 — No IIFEs in component bodies.**
+If you need to compute a value with a `switch`/`if`, write a named pure function
+outside the component and call it in JSX. `(() => { ... })()` inside render is
+a code smell — it hides logic, can't be tested in isolation, and obscures intent.
+
+**Rule 10 — String constants belong outside components.**
+Repeated string literals (font families, URLs, labels) must be extracted to a
+named `const` at module scope or in `src/lib/`. Inline template literals longer
+than ~5 lines (e.g. multi-line code samples) belong in `src/lib/`, not in page
+or component files.
 
 ---
 
