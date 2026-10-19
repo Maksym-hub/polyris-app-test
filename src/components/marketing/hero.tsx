@@ -15,6 +15,7 @@ import {
   Check,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { siteConfig } from "@/config/site"
 
 const stats = [
@@ -44,15 +45,15 @@ function StepItem({
       {status === "active" && (
         <div className="relative flex h-14 w-14 items-center justify-center">
           <div
-            className="absolute inset-0 rounded-full border-2 border-[#3e4451] border-t-[#60a5fa]"
+            className="border-t-primary absolute inset-0 rounded-full border-2 border-white/15"
             style={{ animation: "spin 1.4s linear infinite" }}
           />
-          <Icon className="h-6 w-6 text-[#60a5fa]" />
+          <Icon className="text-primary h-6 w-6" />
         </div>
       )}
       {status === "pending" && (
-        <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#3e4451]">
-          <Icon className="h-6 w-6 text-[#4b5263]" />
+        <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-white/15">
+          <Icon className="h-6 w-6 text-white/25" />
         </div>
       )}
       <span
@@ -61,7 +62,7 @@ function StepItem({
             ? "text-green-400"
             : status === "active"
               ? "text-[#abb2bf]"
-              : "text-[#4b5263]"
+              : "text-white/25"
         }`}
       >
         {label}
@@ -81,7 +82,7 @@ function Connector({ done }: { done?: boolean }) {
 function Spinner() {
   return (
     <span
-      className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-[#60a5fa] border-t-transparent"
+      className="border-primary inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-t-transparent"
       style={{ animation: "spin 0.8s linear infinite" }}
     />
   )
@@ -109,8 +110,8 @@ function PipelineFlow() {
   const executeDone = stage === "complete"
 
   return (
-    <div className="rounded-xl border border-[#3e4451] bg-[#282c34] shadow-2xl">
-      <div className="px-8 pt-8 pb-6">
+    <Card className="gap-0 overflow-hidden border py-0 shadow-2xl">
+      <div className="bg-[#282c34] px-8 pt-8 pb-6">
         <div className="flex items-start">
           <StepItem icon={FileCode2} label="Write DAG" status="done" />
           <Connector done />
@@ -126,14 +127,14 @@ function PipelineFlow() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="flex items-center gap-1.5 border-b border-white/5 px-4 py-2.5">
+      <div className="border-border border-t">
+        <div className="border-border/40 flex items-center gap-1.5 border-b bg-[#282c34] px-4 py-2.5">
           <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
           <div className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
           <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
           <span className="ml-1.5 font-mono text-xs text-[#5c6370]">terminal</span>
         </div>
-        <div className="min-h-[88px] px-5 py-4 font-mono text-xs leading-relaxed text-[#abb2bf]">
+        <div className="min-h-[88px] bg-[#282c34] px-5 py-4 font-mono text-xs leading-relaxed text-[#abb2bf]">
           <div>
             <span className="text-[#60a5fa]">$</span> polyris-deploy --stage prod
           </div>
@@ -182,7 +183,7 @@ function PipelineFlow() {
           )}
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
 
