@@ -13,7 +13,6 @@ import {
   XCircle,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import { siteConfig } from "@/config/site"
 
@@ -160,10 +159,13 @@ function ServerlessVisual() {
 }
 
 const FREE_TIER_TRANSITIONS = 4_000
-const SIMPLE_PIPELINE_TRANSITIONS = 30
-const COMPLEX_PIPELINE_TRANSITIONS = 90
-const FREE_TIER_SIMPLE_RUNS = Math.floor(FREE_TIER_TRANSITIONS / SIMPLE_PIPELINE_TRANSITIONS)
-const FREE_TIER_COMPLEX_RUNS = Math.floor(FREE_TIER_TRANSITIONS / COMPLEX_PIPELINE_TRANSITIONS)
+const COMPLEX_PIPELINE_TRANSITIONS = 342
+const DAILY_RUNS_PER_MONTH = 30
+const COMPLEX_MONTHLY_TRANSITIONS = COMPLEX_PIPELINE_TRANSITIONS * DAILY_RUNS_PER_MONTH
+const SFN_COST_PER_TRANSITION = 0.000025
+const COMPLEX_MONTHLY_COST = (
+  Math.max(0, COMPLEX_MONTHLY_TRANSITIONS - FREE_TIER_TRANSITIONS) * SFN_COST_PER_TRANSITION
+).toFixed(2)
 
 const paysFor = [
   "Step Functions state transitions",
@@ -274,27 +276,25 @@ export function CostSection() {
         </div>
 
         <Card className="mx-auto mt-6 max-w-3xl p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <p className="text-foreground text-sm font-semibold">
-              Start free with AWS&apos;s always-free tier
-            </p>
-            <Badge variant="secondary">AWS Free Tier</Badge>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6 sm:gap-12">
             <div>
-              <p className="text-foreground text-4xl font-bold">~{FREE_TIER_SIMPLE_RUNS}</p>
-              <p className="text-muted-foreground mt-1 text-sm">runs / month</p>
-              <p className="text-muted-foreground/60 mt-0.5 text-xs">simple pipeline · 3 tasks</p>
+              <p className="text-muted-foreground mb-3 text-xs font-medium">
+                Simple pipeline · 3 tasks · daily
+              </p>
+              <p className="text-foreground text-4xl font-bold">Free</p>
+              <p className="text-muted-foreground mt-1 text-sm">within AWS Free Tier</p>
             </div>
             <div>
-              <p className="text-foreground text-4xl font-bold">~{FREE_TIER_COMPLEX_RUNS}</p>
-              <p className="text-muted-foreground mt-1 text-sm">runs / month</p>
-              <p className="text-muted-foreground/60 mt-0.5 text-xs">complex pipeline · 10 tasks</p>
+              <p className="text-muted-foreground mb-3 text-xs font-medium">
+                Complex pipeline · 10 tasks · daily
+              </p>
+              <p className="text-foreground text-4xl font-bold">~${COMPLEX_MONTHLY_COST}</p>
+              <p className="text-muted-foreground mt-1 text-sm">per month in orchestration</p>
             </div>
           </div>
-          <p className="text-muted-foreground/60 border-border/40 mt-4 border-t pt-4 text-xs">
-            Orchestration transitions only (Step Functions free tier: 4,000/month). Lambda, Glue,
-            and Athena execution costs are governed by their own free tiers and are not included.
+          <p className="text-muted-foreground/60 border-border/40 mt-6 border-t pt-4 text-xs">
+            Orchestration cost only. Lambda, Glue, Athena, and other pipeline services billed at
+            standard AWS rates — most fall within the AWS Free Tier for typical usage.
           </p>
         </Card>
 
