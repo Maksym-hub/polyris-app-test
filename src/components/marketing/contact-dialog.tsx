@@ -69,8 +69,7 @@ export function ContactDialog() {
         <Separator />
 
         <p className="text-muted-foreground px-0.5 text-[11px] leading-relaxed">
-          2CheckOut.com Inc. (Ohio, USA) is an authorized retailer of goods and services provided by
-          Quintagroup.
+          Questions about setup or support? Contact the team behind Polyris.
         </p>
       </PopoverContent>
     </Popover>

@@ -30,8 +30,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: "Polyris — Data pipeline orchestration for AWS",
+    template: `%s | Polyris`,
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
-    title: siteConfig.name,
+    title: "Polyris — Data pipeline orchestration for AWS",
     description: siteConfig.description,
-    siteName: siteConfig.name,
+    siteName: "Polyris",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: "Polyris — Data pipeline orchestration for AWS",
     description: siteConfig.description,
   },
   robots: {

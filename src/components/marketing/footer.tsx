@@ -39,27 +39,22 @@ export function Footer() {
               />
             </Link>
             <p className="text-muted-foreground mt-3 max-w-xs text-sm">
-              Serverless data pipeline orchestration on AWS Step Functions.
-            </p>
-            <div className="mt-4 flex items-center gap-2">
-              <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-                Powered by
-              </span>
+              Open-source data pipeline orchestration for AWS teams, developed with ❤️{" "}
               <Link
                 href="https://quintagroup.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-opacity hover:opacity-75"
+                className="inline-flex items-center align-middle transition-opacity hover:opacity-75"
               >
                 <Image
                   src="/quinta-group.png"
                   alt="QuintaGroup"
-                  width={88}
-                  height={25}
+                  width={63}
+                  height={18}
                   className="dark:invert"
                 />
               </Link>
-            </div>
+            </p>
           </div>
 
           {Object.entries(footerLinks).map(([group, links]) => (

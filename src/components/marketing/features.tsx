@@ -3,8 +3,18 @@
 import { useState, useEffect, useRef } from "react"
 import type { ReactNode } from "react"
 import Link from "next/link"
-import { Zap, ArrowDown, ChevronRight, CheckCircle2, XCircle } from "lucide-react"
+import {
+  Zap,
+  ArrowDown,
+  ArrowRight,
+  ChevronRight,
+  CheckCircle2,
+  ExternalLink,
+  XCircle,
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { siteConfig } from "@/config/site"
 
 const ANIM_STEPS = 5
 const STEP_MS = 1400
@@ -150,15 +160,15 @@ function ServerlessVisual() {
 
 const paysFor = [
   "Step Functions state transitions",
-  "Lambda / Glue / Athena execution time",
-  "DynamoDB reads and writes",
+  "AWS task execution and service usage",
+  "DynamoDB reads, writes, and storage",
 ]
 
 const doesNotPayFor = [
-  "Always-on scheduler process",
-  "Metadata database",
-  "Idle worker processes",
-  "Minimum reserved capacity",
+  "Always-on orchestration scheduler processes",
+  "Idle orchestration workers",
+  "Provisioned metadata database servers",
+  "Reserved orchestration compute capacity",
 ]
 
 export function Features() {
@@ -169,25 +179,39 @@ export function Features() {
           <ServerlessVisual />
           <div>
             <p className="text-brand mb-3 text-xs font-semibold tracking-widest uppercase">
-              Serverless
+              Why Polyris
             </p>
             <h2 className="text-foreground mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Event-driven from day one.
-              <br />
-              No always-on anything.
+              Less infrastructure to maintain.
             </h2>
             <p className="text-muted-foreground mb-6 text-base sm:text-lg">
-              EventBridge triggers your Step Functions DAG on schedule. Tasks run on Lambda, Glue,
-              or Athena — on demand, not continuously. No scheduler process, no metadata DB, no idle
-              fleet sitting between runs.
+              AWS handles execution. Polyris gives your team the Python workflow, scheduling, and
+              tools to operate it—without an orchestration server to run.
             </p>
+            <div className="mb-6 space-y-4">
+              <p className="text-muted-foreground text-sm">
+                <strong className="text-foreground">Bring your AWS jobs together.</strong>{" "}
+                Coordinate Lambda, Glue, Athena, ECS, Batch, EMR, and nested Step Functions with
+                Python dependencies and trigger rules.
+              </p>
+              <p className="text-muted-foreground text-sm">
+                <strong className="text-foreground">Validate before you deploy.</strong> Check your
+                workflow and preview the generated Step Functions definition locally, before
+                deploying to AWS.
+              </p>
+              <p className="text-muted-foreground text-sm">
+                <strong className="text-foreground">Keep execution visible.</strong> Your workflows
+                run as Step Functions in your AWS account, with execution history you can inspect
+                and a console to manage your pipelines.
+              </p>
+            </div>
             <Link
               href="https://github.com/Polyris/polyris/blob/main/docs/architecture/ARCHITECTURE.md"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:text-brand inline-flex items-center text-sm font-medium transition-colors"
             >
-              How it works <ChevronRight className="ml-1 h-4 w-4" />
+              Architecture <ChevronRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -206,9 +230,10 @@ export function CostSection() {
             Pay for runs, not for uptime.
           </h2>
           <p className="text-muted-foreground mb-12 text-base sm:text-lg">
-            Traditional orchestrators keep a scheduler, workers, and a metadata DB running around
-            the clock. polyris has none of that — Step Functions charges per state transition.
-            Between runs, the cost is zero.
+            Traditional orchestrators keep a scheduler, workers, and a database server running
+            around the clock. Polyris coordinates workflows on demand with Step Functions, so you
+            don&apos;t reserve orchestration compute for the hours between runs. Put your budget
+            into processing data and give your team fewer servers to maintain.
           </p>
         </div>
 
@@ -241,7 +266,12 @@ export function CostSection() {
           </Card>
         </div>
 
-        <div className="mt-8 text-center">
+        <p className="text-muted-foreground/60 mt-6 text-center text-xs">
+          Storage, logs, console usage, and other AWS service charges still apply. Your total cost
+          depends on your workloads and configuration.
+        </p>
+
+        <div className="mt-6 text-center">
           <Link
             href="https://github.com/Polyris/polyris/blob/main/docs/architecture/ARCHITECTURE.md#cost-model"
             target="_blank"
@@ -250,6 +280,47 @@ export function CostSection() {
           >
             See full cost breakdown <ChevronRight className="ml-1 h-4 w-4" />
           </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function GetStartedSection() {
+  return (
+    <section className="border-border/40 border-t">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-foreground mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+            Start with a Python file.
+          </h2>
+          <p className="text-muted-foreground mb-8 text-base sm:text-lg">
+            Explore the DSL, validate a pipeline, and preview its execution graph locally. When you
+            are ready, deploy Polyris to your AWS account and connect your jobs.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button
+              size="lg"
+              render={<Link href={siteConfig.tryItNow} target="_blank" rel="noopener noreferrer" />}
+            >
+              Try locally
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              render={
+                <Link href={siteConfig.quickstart} target="_blank" rel="noopener noreferrer" />
+              }
+            >
+              <ExternalLink className="mr-2 h-4 w-4" />
+              Deploy to AWS
+            </Button>
+          </div>
+          <p className="text-muted-foreground mt-4 text-sm">
+            Local exploration needs Python 3.11+, with no AWS account required. Allow about 30–45
+            minutes for first-time AWS setup.
+          </p>
         </div>
       </div>
     </section>

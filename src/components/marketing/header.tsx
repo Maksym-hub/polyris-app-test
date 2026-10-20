@@ -12,16 +12,16 @@ export function Header() {
           <Image
             src="/logo.png"
             alt={siteConfig.name}
-            width={96}
-            height={40}
+            width={120}
+            height={50}
             className="dark:hidden"
             priority
           />
           <Image
             src="/logo-dark.png"
             alt={siteConfig.name}
-            width={96}
-            height={40}
+            width={120}
+            height={50}
             className="hidden dark:block"
             priority
           />

@@ -1,14 +1,17 @@
 export const heroCode = `from polyris import DAG, task
 
-with DAG("daily-analytics") as dag:
+with DAG("daily-analytics", schedule="@daily") as dag:
 
-    @task.lambda_function(function_name="ingest")
+    @task.lambda_(function_name="ingest")
     def ingest(): ...
 
-    @task.glue_job(job_name="clean")
+    @task.glue(job_name="clean")
     def clean(): ...
 
-    @task.athena_query(database="analytics")
+    @task.athena(
+        database="analytics",
+        query_string="SELECT count(*) FROM clean_events",
+    )
     def aggregate(): ...
 
-    ingest() >> clean() >> aggregate()`
+    ingest >> clean >> aggregate`

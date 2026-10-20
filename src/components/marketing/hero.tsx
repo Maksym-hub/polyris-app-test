@@ -19,8 +19,8 @@ import { Card } from "@/components/ui/card"
 import { siteConfig } from "@/config/site"
 
 const stats = [
-  { icon: Zap, label: "No idle compute" },
-  { icon: Cloud, label: "AWS Step Functions" },
+  { icon: Zap, label: "No idle orchestration compute" },
+  { icon: Cloud, label: "Your AWS account" },
   { icon: GitBranch, label: "Python 3.11+" },
 ]
 
@@ -156,7 +156,7 @@ function PipelineFlow() {
             <>
               <div className="mt-1 text-green-400">
                 <Check className="mr-1 inline h-3 w-3" />
-                Deployed in 11s
+                Pipeline deployed successfully.
               </div>
               <div className="mt-1 flex items-center gap-1.5">
                 <Spinner />
@@ -169,7 +169,7 @@ function PipelineFlow() {
             <>
               <div className="mt-1 text-green-400">
                 <Check className="mr-1 inline h-3 w-3" />
-                Deployed in 11s
+                Pipeline deployed successfully.
               </div>
               <div className="text-green-400">
                 <Check className="mr-1 inline h-3 w-3" />
@@ -210,13 +210,13 @@ export function Hero() {
             </p>
 
             <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Define pipelines in Python. <span className="text-brand">AWS Step Functions</span>{" "}
-              does the rest.
+              AWS data pipelines without an always-on orchestrator.
             </h1>
 
             <p className="text-muted-foreground text-lg">
-              Write familiar Python, deploy to AWS Step Functions in one command. No always-on
-              scheduler, no Postgres DB, no idle workers.
+              Polyris is an open-source data pipeline orchestrator for AWS teams. Define workflows
+              in Python and deploy them as Step Functions in your own account. Coordinate your AWS
+              jobs and monitor runs from one console.
             </p>
 
             <div className="flex flex-wrap gap-x-6 gap-y-2">
@@ -235,21 +235,24 @@ export function Hero() {
               <Button
                 size="lg"
                 render={
-                  <Link href={siteConfig.quickstart} target="_blank" rel="noopener noreferrer" />
+                  <Link href={siteConfig.tryItNow} target="_blank" rel="noopener noreferrer" />
                 }
               >
-                Get started
+                Try locally
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                render={<Link href={siteConfig.github} target="_blank" rel="noopener noreferrer" />}
+                render={
+                  <Link href={siteConfig.quickstart} target="_blank" rel="noopener noreferrer" />
+                }
               >
                 <ExternalLink className="mr-2 h-4 w-4" />
-                View on GitHub
+                Deploy to AWS
               </Button>
             </div>
+            <p className="text-muted-foreground text-sm">Explore locally without an AWS account.</p>
           </div>
 
           <div className="hidden lg:block">

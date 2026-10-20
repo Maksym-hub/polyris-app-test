@@ -189,7 +189,7 @@ function TabPanel({
         <h2 className="text-foreground mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
           {heading}
         </h2>
-        <p className="text-muted-foreground mb-6 text-base sm:text-lg">{body}</p>
+        <div className="text-muted-foreground mb-6 text-base sm:text-lg">{body}</div>
         <Link
           href={link}
           target="_blank"
@@ -320,25 +320,10 @@ export function FeaturesShowcase({ highlighted }: { highlighted: string }) {
               <div style={phaseStyle(phase)}>
                 <TabPanel
                   label="Python DSL"
-                  heading={
-                    <>
-                      A pipeline is a Python file.
-                      <br />
-                      The DAG builds itself.
-                    </>
-                  }
-                  body={
-                    <>
-                      Annotate functions with task decorators — Lambda, Glue, Athena, Batch, and
-                      more. Chain them with{" "}
-                      <code className="bg-muted text-foreground rounded px-1.5 py-0.5 font-mono text-sm">
-                        &gt;&gt;
-                      </code>
-                      . polyris reads the graph and generates the state machine automatically.
-                    </>
-                  }
+                  heading="A pipeline is a Python file."
+                  body="Reference your AWS jobs with task decorators, chain their dependencies, and set a schedule. Polyris generates the Step Functions state machine. The processing code stays in your jobs."
                   link="https://github.com/Polyris/polyris/blob/main/docs/features/DSL.md"
-                  linkLabel="Read the DSL docs"
+                  linkLabel="Read the Python DSL docs"
                   visual={
                     <Card className="min-w-0 gap-0 overflow-hidden border py-0">
                       <div className="border-border/40 flex items-center gap-1.5 border-b bg-[#282c34] px-4 py-3">
@@ -363,25 +348,10 @@ export function FeaturesShowcase({ highlighted }: { highlighted: string }) {
               <div style={phaseStyle(phase)}>
                 <TabPanel
                   label="Deploy"
-                  heading={
-                    <>
-                      One command.
-                      <br />
-                      Pipeline live in seconds.
-                    </>
-                  }
-                  body={
-                    <>
-                      Run{" "}
-                      <code className="bg-muted text-foreground rounded px-1.5 py-0.5 font-mono text-sm">
-                        polyris-deploy
-                      </code>{" "}
-                      and it reads your DAG, generates a CloudFormation template, and deploys the
-                      Step Functions state machine. No ASL, no JSON, no manual stack management.
-                    </>
-                  }
-                  link="https://github.com/Polyris/polyris/blob/main/docs/features/DSL.md#task-types"
-                  linkLabel="See supported task types"
+                  heading="Deploy with one command."
+                  body="Once the shared infrastructure is installed, polyris-deploy reads your DAG, generates a CloudFormation template, and deploys your state machine and schedule. The setup guide covers first-time AWS installation."
+                  link="https://github.com/Polyris/polyris/blob/main/docs/getting-started/QUICKSTART.md"
+                  linkLabel="Follow the AWS setup guide"
                   visual={
                     <Card className="gap-0 overflow-hidden border py-0">
                       <div className="border-border/40 flex items-center gap-1.5 border-b bg-[#282c34] px-4 py-3">
@@ -392,9 +362,6 @@ export function FeaturesShowcase({ highlighted }: { highlighted: string }) {
                       </div>
                       <div className="bg-[#282c34] p-4 font-mono text-xs leading-relaxed text-[#abb2bf]">
                         <div>
-                          <span className="text-brand">$</span> cd pipelines/daily-analytics
-                        </div>
-                        <div className="mt-1">
                           <span className="text-brand">$</span> polyris-deploy --stage prod
                         </div>
                         <div className="mt-3 border-t border-white/10 pt-3 opacity-60">
@@ -431,10 +398,19 @@ export function FeaturesShowcase({ highlighted }: { highlighted: string }) {
               <div style={phaseStyle(phase)}>
                 <TabPanel
                   label="Console"
-                  heading={<>See it run.</>}
-                  body="The polyris console shows every pipeline as a live DAG — tasks, statuses, and run history in one view."
-                  link="https://github.com/Polyris/polyris"
-                  linkLabel="View on GitHub"
+                  heading="See it run."
+                  body={
+                    <>
+                      The Polyris console brings dependencies, task statuses, durations, and run
+                      history into one view. Open any task to inspect its execution.
+                      <span className="mt-4 block">
+                        <strong>Recover without starting over.</strong> Inspect a failed task, retry
+                        it, and continue within the same pipeline run.
+                      </span>
+                    </>
+                  }
+                  link="https://github.com/Polyris/polyris/blob/main/docs/operations/UI.md"
+                  linkLabel="Explore the console"
                   visual={
                     <Card className="gap-0 overflow-hidden border py-0">
                       <div className="border-border/40 bg-muted/30 flex items-center justify-between border-b px-4 py-3">

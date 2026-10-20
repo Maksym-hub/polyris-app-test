@@ -3,7 +3,7 @@ import { codeToHtml } from "shiki"
 import { heroCode } from "@/lib/dag-code"
 import { Header } from "@/components/marketing/header"
 import { Hero } from "@/components/marketing/hero"
-import { Features, CostSection } from "@/components/marketing/features"
+import { Features, CostSection, GetStartedSection } from "@/components/marketing/features"
 import { FeaturesShowcase } from "@/components/marketing/features-showcase"
 import { Footer } from "@/components/marketing/footer"
 
@@ -18,6 +18,7 @@ export default async function Home() {
         <Features />
         <FeaturesShowcase highlighted={highlighted} />
         <CostSection />
+        <GetStartedSection />
       </main>
       <Footer />
     </>
