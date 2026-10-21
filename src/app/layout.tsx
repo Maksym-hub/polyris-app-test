@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     title: "Polyris — Data pipeline orchestration for AWS",
     description: siteConfig.description,
   },
+  icons: {
+    icon: "/logo-icon.png",
+  },
   robots: {
     index: true,
     follow: true,
