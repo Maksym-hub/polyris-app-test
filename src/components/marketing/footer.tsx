@@ -22,21 +22,9 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-2">
-            <Link href="/" className="inline-flex items-center">
-              <Image
-                src="/logo.png"
-                alt={siteConfig.name}
-                width={80}
-                height={34}
-                className="dark:hidden"
-              />
-              <Image
-                src="/logo-dark.png"
-                alt={siteConfig.name}
-                width={80}
-                height={34}
-                className="hidden dark:block"
-              />
+            <Link href="/" className="inline-flex items-center gap-2">
+              <Image src="/logo-icon.png" alt="" width={26} height={26} className="rounded-[7px]" />
+              <span className="text-foreground font-semibold">{siteConfig.name}</span>
             </Link>
             <p className="text-muted-foreground mt-3 max-w-xs text-sm">
               Open-source data pipeline orchestration for AWS teams, developed with ❤️{" "}
