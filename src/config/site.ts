@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "polyris",
+  name: "Polyris",
   description:
     "Open-source data pipeline orchestration for AWS teams. Define workflows in Python, run them on Step Functions in your own account, and monitor runs in one console.",
   url: "https://polyris.dev",

@@ -10,6 +10,7 @@ const TEXT = "#f1f5f9"
 const MUTED = "#64748b"
 const DIVIDER = "#2e3350"
 const DOMAIN = "#334155"
+const BRAND_GLOW = "rgba(68, 114, 224, 0.15)"
 
 // Satori (ImageResponse renderer) requires display:"flex" on every element.
 // marginTop:-250 with top:"50%" centers the glow because Satori has no transform support.
@@ -37,7 +38,7 @@ export default function Image() {
           width: 700,
           height: 500,
           marginTop: -250,
-          background: "radial-gradient(ellipse, #4472e026 0%, transparent 70%)",
+          background: `radial-gradient(ellipse, ${BRAND_GLOW} 0%, transparent 70%)`,
           display: "flex",
         }}
       />
@@ -49,7 +50,7 @@ export default function Image() {
           left: 0,
           right: 0,
           height: 3,
-          background: `linear-gradient(90deg, ${BRAND} 0%, ${BRAND}55 55%, transparent 100%)`,
+          background: `linear-gradient(90deg, ${BRAND} 0%, rgba(96, 136, 240, 0.33) 55%, transparent 100%)`,
           display: "flex",
         }}
       />
