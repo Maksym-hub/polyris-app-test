@@ -1,10 +1,18 @@
 import type { NextConfig } from "next"
 
+const basePath = "/polyris-app-test"
+
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/polyris-app-test",
+  basePath,
   trailingSlash: true,
-  images: { unoptimized: true },
+  images: {
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+  },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   turbopack: {
     rules: {
       "*.css": {
