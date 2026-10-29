@@ -1,4 +1,3 @@
-"use cache"
 import { codeToHtml } from "shiki"
 import { heroCode } from "@/lib/dag-code"
 import { siteConfig } from "@/config/site"
